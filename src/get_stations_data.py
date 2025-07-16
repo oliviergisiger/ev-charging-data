@@ -15,14 +15,14 @@ MAX_DATE = datetime(2099, 12, 31)
 def read_current_stations_file():
     if STATIONS_FILE_PATH.is_file():
         df = pd.read_csv(STATIONS_FILE_PATH, parse_dates=['valid_from', 'valid_until'])
-        df['lastUpdate'] = pd.to_datetime(df['lastUpdate'], format='ISO8601', utc=True)
+        df['lastUpdate'] = pd.to_datetime(df['lastUpdate'], utc=True).dt.tz_convert(None)
         return df
     return pd.DataFrame(columns=STATIONS_FILE_COLUMNS)
 
 
 def upsert_stations(df_new, valid_until):
     df_old = read_current_stations_file()
-    df_new['lastUpdate'] = pd.to_datetime(df_new.lastUpdate, format='ISO8601')
+    df_new['lastUpdate'] = pd.to_datetime(df_new.lastUpdate, utc=True).dt.tz_convert(None)
     df_new['lastUpdate'] = df_new.lastUpdate.fillna(datetime(2000, 1, 1).isoformat())
     df_new.loc[:, 'valid_until'] = MAX_DATE
     merged = pd.merge(df_new, df_old[df_old.valid_until == MAX_DATE], on='_id', how='left', suffixes=('_new', '_old'))
