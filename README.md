@@ -22,3 +22,9 @@ It uses an upsert logic on the field ``lastUpdated`` and sets validity periods t
 - ```_id```: unique station identifier corresponding to ```_id``` in stations file
 - ```DateTime```: date time
 - ```EvseStatus```: status of charging station: 0=```Available```, 1=```Occupied```, NA=```Unknown```
+
+## Configs
+In ```configs.py```, some configurations are defined: 
+- relevant paths
+- logging
+- fields to fetch from API

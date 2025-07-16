@@ -13,11 +13,11 @@ def format_timeseries_data(df):
     df.loc[:, 'EvseStatus'] = df.EvseStatus.map(AVAILABILITY_MAP)
     return df[['DateTime', '_id', 'EvseStatus']]
 
+
 def get_timeseries_data(timestamp):
     data = get_data(STATION_STATUS)
     df = pd.DataFrame(data)
     df.loc[:, 'DateTime'] = timestamp.replace(minute=0, second=0, microsecond=0)
-
     return format_timeseries_data(df)
 
 
@@ -29,13 +29,11 @@ def save_timeseries_data(df, _date):
     df.to_csv(file_path, mode='a', index=False, header=write_header)
 
 
-
 def workflow():
-    logging.info('START TIMESERIES WORKFLOW')
     timestamp = datetime.now()
     data = get_timeseries_data(timestamp)
     save_timeseries_data(data, timestamp.date())
-    logging.info('END TIMESERIES WORKFLOW')
+    logging.info('updated availabilities')
 
 
 if __name__ == '__main__':
