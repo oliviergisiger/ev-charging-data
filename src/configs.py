@@ -10,6 +10,8 @@ LOG_DIR = BASE_DIR / 'logs'
 LOG_FILE = LOG_DIR / 'charging_data.log'
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 
+INTERVAL = 15 # interval in which dynamic data is fetched, in minutes
+
 logging.basicConfig(
     filename=LOG_FILE,
     level=logging.INFO,
