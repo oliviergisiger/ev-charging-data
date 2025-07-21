@@ -9,7 +9,7 @@ It uses an upsert logic on the field ``lastUpdated`` and sets validity periods t
 - ```_id```: unique station identifier
 - ```lastUpdate```: last change to metadata
 - ```ChargingFacilities```: list with outlets, containing ``Power``, ``Voltage``, ``PowerType`` for each outlet.
-- ```Plugs```: Plug type
+- ```Plugs```: Plug type (s)
 - ```GeoCoordinates```: dict, coordinates degree: lat, lon
 - ```Accessibility```: One of: ```Free publicly accessible```, ```Paying publicly accessible```, ```Restricted access```, ```Test Station```, ```Unspecified```
 - ```AccessibilityLocation```: One of: ```OnStreet```, ```ParkingLot```, ```UndergroundParkingGarage```, ```ParkingGarage```
@@ -22,6 +22,9 @@ It uses an upsert logic on the field ``lastUpdated`` and sets validity periods t
 - ```_id```: unique station identifier corresponding to ```_id``` in stations file
 - ```DateTime```: date time
 - ```EvseStatus```: status of charging station: 0=```Available```, 1=```Occupied```, NA=```Unknown```
+
+*For more information visit the [OICP GitHub Documentation](https://github.com/hubject/oicp/blob/master/OICP-2.3/OICP%202.3%20CPO/03_CPO_Data_Types.asciidoc)*
+
 
 ## Configs
 In ```configs.py```, some configurations are defined: 

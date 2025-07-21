@@ -22,8 +22,8 @@ def read_current_stations_file():
 
 def upsert_stations(df_new, valid_until):
     df_old = read_current_stations_file()
-    df_new['lastUpdate'] = pd.to_datetime(df_new.lastUpdate, utc=True).dt.tz_convert(None)
-    df_new['lastUpdate'] = df_new.lastUpdate.fillna(datetime(2000, 1, 1).isoformat())
+    df_new['lastUpdate'] = pd.to_datetime(df_new.lastUpdate)
+    df_new['lastUpdate'] = df_new.lastUpdate.fillna(datetime(2000, 1, 1))
     df_new.loc[:, 'valid_until'] = MAX_DATE
     merged = pd.merge(df_new, df_old[df_old.valid_until == MAX_DATE], on='_id', how='left', suffixes=('_new', '_old'))
     changed = merged[(merged['lastUpdate_new'] != merged['lastUpdate_old']) | (merged['lastUpdate_old'].isna()) ].copy()
@@ -37,6 +37,7 @@ def upsert_stations(df_new, valid_until):
 
 def save_stations_data(data, timestamp: datetime):
     df_new = pd.DataFrame(data)[STATION_PROPERTIES.split(',')]
+    df_new.loc[~df_new.lastUpdate.isna(), 'lastUpdate'] = df_new.lastUpdate.str[:10]
     df_new.loc[:, 'valid_until'] = datetime(2099, 12, 31)
     df_upserted = upsert_stations(df_new, timestamp.date())
     df_upserted.to_csv(STATIONS_FILE_PATH, index=False)
