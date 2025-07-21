@@ -32,3 +32,6 @@ In ```configs.py```, some configurations are defined:
 - logging
 - fields to fetch from API
 
+## Notebook
+The [Jupyter Notebook](notebook.ipynb) shows an example query to the stored data. 
+
