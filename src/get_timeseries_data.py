@@ -4,7 +4,6 @@ import logging
 from datetime import datetime
 from pathlib import Path
 import pandas as pd
-
 from base_get_data import get_data
 from configs import STATION_STATUS, TIMESERIES_BASE_PATH, AVAILABILITY_MAP
 

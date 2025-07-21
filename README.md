@@ -21,7 +21,7 @@ It uses an upsert logic on the field ``lastUpdated`` and sets validity periods t
 ### Columns
 - ```_id```: unique station identifier corresponding to ```_id``` in stations file
 - ```DateTime```: date time
-- ```EvseStatus```: status of charging station: 0=```Available```, 1=```Occupied```, NA=```Unknown```
+- ```EvseStatus```: status of charging station: 0=```Available```, 2=```Occupied```; see configs for details. 
 
 *For more information visit the [OICP GitHub Documentation](https://github.com/hubject/oicp/blob/master/OICP-2.3/OICP%202.3%20CPO/03_CPO_Data_Types.asciidoc)*
 
@@ -31,3 +31,4 @@ In ```configs.py```, some configurations are defined:
 - relevant paths
 - logging
 - fields to fetch from API
+
