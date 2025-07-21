@@ -1,6 +1,8 @@
 # EV Charging Data
 
-This repo loads data from ich-tanke-strom API and stores the data into different files: 
+This repo loads data from ich-tanke-strom API and stores the data into different files. 
+**At the moment, timeseries data is fetched every 15 minutes. To change the frequency, use the INTERVAL parameter from config. 
+The cronjob must be set acordingly**
 
 ## Charging Stations
 The file ```data/charging_stations/charging_stations.csv``` collects all stations available in the API. 
