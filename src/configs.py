@@ -27,4 +27,4 @@ STATIONS_FILE_COLUMNS = [
     'GeoCoordinates', 'Accessibility', 'AccessibilityLocation', 'valid_from', 'valid_until'
 ]
 
-AVAILABILITY_MAP = {'Available': 0, 'Occupied': 1, 'Unknown': None}
+AVAILABILITY_MAP = {'Available': 0, 'Reserved': 1, 'Occupied': 2, 'OutOfService': 3, 'Unknown': None, 'EvseNotFound': None}

@@ -43,11 +43,6 @@ def save_stations_data(data, timestamp: datetime):
     df_upserted.to_csv(STATIONS_FILE_PATH, index=False)
 
 
-def get_stations_data():
-    data = get_data(STATION_PROPERTIES)
-    return data
-
-
 def workflow():
     logging.info('start getting stations')
     timestamp = datetime.now()

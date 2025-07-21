@@ -5,7 +5,6 @@ import requests
 from configs import URL
 
 
-
 def get_data(fields):
     params = {
         'service': 'WFS',
