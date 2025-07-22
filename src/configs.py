@@ -30,3 +30,5 @@ STATIONS_FILE_COLUMNS = [
 ]
 
 AVAILABILITY_MAP = {'Available': 0, 'Reserved': 1, 'Occupied': 2, 'OutOfService': 3, 'Unknown': None, 'EvseNotFound': None}
+
+HEALTHCHECK_ID = 'insert healthcheck.io ID'
