@@ -20,12 +20,12 @@ logging.basicConfig(
 
 
 URL = 'http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows'
-STATION_PROPERTIES = '_id,GeoCoordinates,Plugs,AccessibilityLocation,Accessibility,ChargingFacilities,lastUpdate'
+STATION_PROPERTIES = '_id,ChargingStationId,Address,GeoCoordinates,Plugs,AccessibilityLocation,Accessibility,ChargingFacilities,lastUpdate'
 STATION_STATUS = 'EvseStatus'
 
 
 STATIONS_FILE_COLUMNS = [
-    '_id', 'lastUpdate', 'ChargingFacilities', 'Plugs',
+    '_id', 'ChargingStationId', 'Address', 'lastUpdate', 'ChargingFacilities', 'Plugs',
     'GeoCoordinates', 'Accessibility', 'AccessibilityLocation', 'valid_from', 'valid_until'
 ]
 
