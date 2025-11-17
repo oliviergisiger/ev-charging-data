@@ -18,7 +18,7 @@ def format_timeseries_data(df):
 
 def floor_sampling(dt: datetime, interval: int):
     interval = timedelta(minutes=interval)
-    return dt - (dt - dt.replace(minute=0, second=0, microsecond=0)) % interval
+    return (dt - (dt - dt.replace(minute=0, second=0, microsecond=0)) % interval).strftime("%Y-%m-%d %H:%M:%S")
 
 
 def get_timeseries_data(timestamp, interval: int):

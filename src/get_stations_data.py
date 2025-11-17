@@ -19,8 +19,7 @@ def read_current_stations_file():
         return df
     return pd.DataFrame(columns=STATIONS_FILE_COLUMNS)
 
-
-def upsert_stations(df_new, valid_until):
+def upsert_stations(df_new, valid_from):
     df_old = read_current_stations_file()
     df_new['lastUpdate'] = pd.to_datetime(df_new.lastUpdate)
     df_new['lastUpdate'] = df_new.lastUpdate.fillna(datetime(2000, 1, 1))
@@ -28,10 +27,11 @@ def upsert_stations(df_new, valid_until):
     merged = pd.merge(df_new, df_old[df_old.valid_until == MAX_DATE], on='_id', how='left', suffixes=('_new', '_old'))
     changed = merged[(merged['lastUpdate_new'] != merged['lastUpdate_old']) | (merged['lastUpdate_old'].isna()) ].copy()
     invalids = changed['_id'].unique()
-    df_old.loc[(df_old['_id'].isin(invalids)) & (df_old['valid_until'] == MAX_DATE), 'valid_until'] = valid_until
-    updated_rows = df_new[df_new['_id'].isin(invalids)]
-    df_upserted = pd.concat([df_old, updated_rows], ignore_index=True)
-    logging.info(f'invalidated rows: {len(invalids)}. total rows in stations file: {df_upserted.shape[0]}')
+    df_old.loc[(df_old['_id'].isin(invalids)) & (df_old['valid_until'] == MAX_DATE), 'valid_until'] = valid_from
+    df_new_valid = df_new[df_new['_id'].isin(invalids)].copy()
+    df_new_valid['valid_from'] = valid_from
+    df_new_valid['valid_until'] = MAX_DATE
+    df_upserted = pd.concat([df_old, df_new_valid], ignore_index=True)
     return df_upserted
 
 
